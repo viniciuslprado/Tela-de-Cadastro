@@ -55,6 +55,16 @@ export const PercentText = styled.span`
     font-weight: 700;
 `
 
+export const LogoutButton = styled.button`
+    background: #E4105D; /* vermelho DIO */
+    color: #FFFFFF;
+    border: 0;
+    border-radius: 16px;
+    padding: 6px 10px;
+    cursor: pointer;
+    font-weight: 700;
+`
+
 export const BuscarInputContainer = styled.div`
     width: 275px;
     height: 30px;

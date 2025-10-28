@@ -5,7 +5,7 @@ import logo from '../../assets/logo-dio.png';
 import { Button } from '../Button';
 import { FiSearch, FiShare2, FiChevronDown, FiBell } from 'react-icons/fi'
 
-import { Container, Wrapper, BuscarInputContainer, Input, Row, Menu, MenuRight, UserPicture, LeftLabel, RightIcons, IconButton, PercentText } from './styles';
+import { Container, Wrapper, BuscarInputContainer, Input, Row, Menu, MenuRight, UserPicture, LeftLabel, RightIcons, IconButton, PercentText, LogoutButton } from './styles';
 
 const Header = ({autenticado}) => {
   const navigate = useNavigate()
@@ -38,7 +38,7 @@ const Header = ({autenticado}) => {
                   <IconButton><FiBell /></IconButton>
                   <UserPicture src={user?.image ? user.image : 'https://avatars.dicebear.com/api/initials/default.svg'}/>
                   <IconButton><FiChevronDown /></IconButton>
-                  <IconButton onClick={() => { localStorage.removeItem('user'); navigate('/'); }}>Sair</IconButton>
+                  <LogoutButton onClick={() => { localStorage.removeItem('user'); navigate('/'); }}>Sair</LogoutButton>
                 </RightIcons>
               ) : (
               <>
