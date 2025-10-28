@@ -1,70 +1,76 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Tela de Cadastro — pequeno clone de feed (estudo)
 
-## Available Scripts
+Projeto simples criado com Create React App e um mock API (json-server) para treinar telas de cadastro/login, feed e ranking. É uma versão didática para estudo e prototipagem local.
 
-In the project directory, you can run:
+Principais ideias:
+- Formulário de cadastro com validação (react-hook-form) e verificação de email duplicado no mock API.
+- Login que persiste sessão em localStorage e redireciona para a tela de feed.
+- Mock API com `json-server` (arquivo `db.json`) para armazenar usuários.
 
-### `npm start`
+Stack
+- React (Create React App)
+- react-hook-form (validação)
+- styled-components (estilos)
+- json-server (mock API)
+- axios (requisições HTTP)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Como rodar (local)
+1. Instale dependências:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```powershell
+npm install
+```
 
-### `npm test`
+2. Inicie o ambiente de desenvolvimento (front + mock API) em um comando:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```powershell
+npm run dev
+```
 
-### `npm run build`
+Esse script usa `concurrently` + `cross-env` e iniciará:
+- frontend: http://localhost:3001
+- mock API (json-server): http://localhost:8001
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Observação sobre porta 3000
+- Durante o desenvolvimento, se a porta 3000 já estiver em uso, o `dev` foi configurado para forçar o frontend em `PORT=3001` automaticamente. Se preferir usar 3000, finalize o processo que está ouvindo nela (ex.: no PowerShell):
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```powershell
+# encontre o PID (exemplo)
+netstat -ano | findstr :3000
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# mate o processo com o PID retornado
+Stop-Process -Id <PID> -Force
+# ou (Windows)
+taskkill /PID <PID> /F
+```
 
-### `npm run eject`
+Scripts úteis
+- `npm run dev` — roda frontend + json-server em paralelo (recomendado para desenvolvimento).
+- `npm run api` — roda apenas o json-server (porta 8001).
+- `npm start` — roda somente o frontend (por padrão CRA, porta 3000 se livre).
+- `npm run build` — cria build de produção.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Endpoints (mock API)
+- Usuários: GET/POST em `http://localhost:8001/users` (json-server).
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Estrutura relevante
+- `src/pages/login` — tela de login
+- `src/pages/register` — tela de cadastro
+- `src/pages/feed` — feed (usuario home)
+- `src/components/Card` — cartão de post
+- `db.json` — banco de dados do json-server
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Uso rápido
+- Crie uma conta em `/register` → ao criar, você é redirecionado ao `/feed`.
+- Faça logout pelo botão no header (isso limpa o usuário do localStorage).
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Próximos passos sugeridos
+- Proteger rotas com um Guard/Context de autenticação (ex.: React Context + PrivateRoute).
+- Substituir alert(...) por toasts/notifications.
+- Melhorar testes e adicionar CI.
 
-## Learn More
+Licença
+- Projeto de estudo — sem licença específica.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Se quiser, eu adapto este README para inglês, adiciono badges ou incluo um guia de deploy.
